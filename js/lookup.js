@@ -51,3 +51,7 @@ function lookup(courseID){ // Originally Patrick/Jing group
   }
 
 }
+
+function storeGlobal() {
+
+}

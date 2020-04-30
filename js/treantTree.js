@@ -1,6 +1,7 @@
 // config for tree container div
 // see html
-const treetop = "ID1020";
+
+console.log(treetop);
 
 let TREANT = {
 	chart: {
@@ -27,7 +28,7 @@ while(lookups.length > 0) { //we iterate until there are nothing left to look up
 
 
   let result = lookup(active.text.id);
-
+	console.log(active.text.id);
   let children = result[1];
   active.text.name = ""+result[0]; // gotta coerce the "string" to act like a proper string
   active.text.credits = 7.5; //result[3]+" hp";

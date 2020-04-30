@@ -110,26 +110,4 @@ class Node {
 
 }
 
-function nodifyLookupMAIN(courseCode) {
-  return new Node(courseCode);
-}
-
-function getCorrectNodeArr(nodeCourseCode) {
-
-  console.log("looking for " + nodeCourseCode);
-  console.log("gloabal arr: ");
-  console.log(allPraiseTheArrGods);
-  console.log(instanceCounter);
-
-  for (var i=0; i < allPraiseTheArrGods.length; i++) {
-    if(allPraiseTheArrGods[i][1] == nodeCourseCode) {
-      console.log("found; " + nodeCourseCode);
-      return allPraiseTheArrGods[i];
-      break;
-    }
-  }
-
-  console.log("getCorrectNodeArr error when looking for: " + nodeCourseCode);
-  console.log(allPraiseTheArrGods);
-
-}
+var treetop;
