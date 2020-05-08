@@ -1,4 +1,3 @@
-
 // types out list element - not collapsable
 function listElementNoChild(node) {
     document.writeln(
@@ -22,6 +21,7 @@ function listElementWithChild(node) {
 function traverseGraph(node) {
     // Write outs the parent
     // Displayed as: Hyperlink(CourseCode) - courseName
+
     if (node.equivalent.length > 0 || node.prerequisites.length > 0) {
         document.writeln(
             '<li><span class="caret2">'
@@ -55,31 +55,7 @@ function traverseGraph(node) {
     } else {
         listElementNoChild(node);
     }
-/*
-    if (node.prerequisites.length == 0) {
-        listElementNoChild(node);
-    } else {
-            listElementWithChild(node);
-            document.write('<ul class="nested">'); // creates nested list of children
-                node.prerequisites.forEach(element => { //adding children to list
-                    traverseGraph(element);
-                });
-
-            document.write("</ul>");
-        document.write("</li>");
-    }
-*/
 }
-
-// var toggler = document.getElementsByClassName("caret2");
-// var i;
-//
-// for (i = 0; i < toggler.length; i++) {
-//   toggler[i].addEventListener("click", function() {
-//     this.parentElement.querySelector(".nested").classList.toggle("active");
-//     this.classList.toggle("caret2-down");
-//   });
-// }
 
 /*
     IS1206 - Operativsystem     (expandable)
@@ -93,17 +69,8 @@ function traverseGraph(node) {
             ID1018
             ID1020              (expandable)
                 ID1018
-
-
 parent with equivalents no child    (expandable) check
-
 parent with equivalents with child  (expandable) check
-
 parent with no child                (not expandable)
-
 parent with child                   (expandable) check
-
-
-
-
 */
