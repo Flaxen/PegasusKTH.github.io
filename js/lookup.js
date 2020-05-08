@@ -186,3 +186,7 @@ function getEquivalents(dataString) {
 
   return [equivalents, dataString];
 }
+
+function storeGlobal() {
+
+}
