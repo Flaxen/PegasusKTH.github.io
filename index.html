@@ -1,74 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-
     <meta charset="utf-8">
-    <style>
-    ul, #prereqUL {
-      list-style-type: none;
-    }
 
-    #prereqUL {
-      margin: 0;
-      padding: 0;
-    }
 
-    .caret {
-      cursor: pointer;
-      -webkit-user-select: none; /* Safari 3.1+ */
-      -moz-user-select: none; /* Firefox 2+ */
-      -ms-user-select: none; /* IE 10+ */
-      user-select: none;
-    }
-
-    .caret::before {
-      content: "\25B6";
-      color: black;
-      display: inline-block;
-      margin-right: 6px;
-    }
-
-    .caret-down::before {
-      -ms-transform: rotate(90deg); /* IE 9 */
-      -webkit-transform: rotate(90deg); /* Safari */
-      transform: rotate(90deg);
-    }
-
-    .nested {
-      display: block;
-    }
-
-    .active {
-      display: none;
-    }
-    </style>
-    <title> Task main </title>
-
+    <script type="text/javascript" src="js/lookup.js"></script>
+    <!-- <script type="text/javascript" src="js/node.js"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="main.js"></script>
 
-
-    <link rel="stylesheet" href="js/treant/Treant.css">
-
-  </head>
-  <body style="padding: 500px; padding-top: 50px;">
-
-    <div class="chart" id="chart" style="width:50%; float:right;">
-    </div>
-
-    <script src="js/treant/Treant.js"></script>
     <script src="js/jquery-3.5.0.min.js"></script>
-    <script src="js/raphael.js"></script>
 
-    <script type="text/javascript" src="js/treantTree.js"></script>
-    <script type="text/javascript">
-      tree = new Treant( simple_chart_config, $ );
-    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div>
-      <script type="text/javascript" src="js/prereqList.js"></script>
+
+    <title> Task main </title>
+    <link href="css/main.css" rel="stylesheet">
+    <!-- fonts from google api for the headers -->
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Audiowide&family=Days+One&family=Fredoka+One&family=Shrikhand&display=swap" rel="stylesheet">
+    <!-- fonts from google api for the content text -->
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&family=Manrope&family=Montserrat&family=Rubik&display=swap" rel="stylesheet">
+  </head>
+
+
+  <body style="background-image: url('image/background.jpg');" id="background" >
+
+    <div id = "demoPopup">
+      <div id = "demoPopupInner" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <h3> Welcome! </h3>
+        <p>
+          Are you here for the project-exhibition?
+        </p>
+        <p>
+          You are very welcome to join our zoom-room (ID available on the main KTH exhibition-page) if you want to ask questions or get a tour on how the site is used or implemented.
+          If time is short roughly the same information about the product can be accessed on the about-page and the help/FAQ-page.
+        </p>
+        <br>
+        <p> We haven't implemented any cookies so you'll get this popup every time you visit this page :)</p>
+        <br>
+
+        <a id="close" onclick="document.getElementById('demoPopup').style.display = 'none'">Click to close</a>
+
+      </div>
     </div>
 
+    <div id="container">
+      <div id="content-wrap">
+        <div id="title">
+          <img src = "image/logo.png" id="pegasus" class="center" alt="Logo Pegasus Project group" title="Learning is Magic">
+          <h1 class="center">PEGASEARCH</h1>
+          <h2 class="center">KTH Prerequisite Finder</h2>
+        </div>
+
+        <!-- Handles the searchbox, input is sent as a URL tag "... ?courseCode=II1305" to the next html page -->
+        <div id="search" class="center">
+          <form action="graph.html" method="GET" id="searchBar">
+            <input type="text" name="courseCode" placeholder="Enter a course.." id="placeHolder" required>
+            <input type="submit" value="Pegasearch!" id="searchButton"/>
+          </form>
+        </div>
+
+        <script>
+          var input = document.getElementById("search");
+          input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+          event.preventDefault();
+          // console.log("hej");
+          document.getElementById("button1").click();
+          // console.log("hej");
+          }
+          });
+
+
+
+        </script>
+
+        <div class="line"></div>
+
+          <!-- <div class="footer col-lg-12 col-md-12 col-sm-12 col-xs-12" id="footer">
+            <ul id="footeritem">
+              <li><a href="about.html">About</a></li>
+              <li><a href="help.html">Help/FAQ</a></li>
+              <li><a href="https://pegasuskth.github.io/pegasus-projectpage.github.io/">Project Website</a></li>
+              <li><a href="mailto:rasham@kth.se">Contact: rasham@kth.se</a></li>
+              </ul>
+            </div> -->
+      </div>
+          <footer id="footer">
+              <!-- <ul id="footeritem">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html" >About</a></li>
+              <li><a href="help.html">Help/FAQ</a></li>
+              <li><a href="https://pegasuskth.github.io/pegasus-projectpage.github.io/">Project Website</a></li>
+              <li><a href="mailto:rasham@kth.se" >Contact: rasham@kth.se</a></li>
+              </ul> -->
+              <a href="index.html" class="col-lg-2 col-sm-2 col-md-2 col-xs-2"> Home &nbsp</a>
+              <a href="about.html" class="col-lg-2 col-sm-2 col-md-2 col-xs-2"> About &nbsp</a>
+              <a href="help.html"  class="col-lg-2 col-sm-2 col-md-2 col-xs-2"> Help/FAQ &nbsp</a>
+              <a href="https://pegasuskth.github.io/pegasus-projectpage.github.io/"  class="col-lg-2 col-sm-2 col-md-2 col-xs-2"> Project Website</a>
+              <a href="mailto:rasham@kth.se" class="col-lg-2 col-sm-2 col-md-2 col-xs-2">Contact:&nbsp rasham@kth.se</a>
+            </footer>
+    </div>
   </body>
 </html>

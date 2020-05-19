@@ -1,163 +1,58 @@
+// TODO: SearchBox intergration needed in var listIntegration. @param courseCode for nodifyLookupMAIN
+/*
+	This file takes a Course Code from index.html searching functionality and builds a tree
 
-globalIDcount = 0;
-class Node {
-    constructor(courseCode){
-        this.courseCode = courseCode;
-        this.prerequisites = [];
-        this.courseURL = "https://www.kth.se/student/kurser/kurs/" + courseCode;
-        this.parentNode = null;
-        this._json_id = globalIDcount++;
-    }
+	1.	NodifyLookupMAIN takes a course code and returns all information in a jsonObject
+	2.	A tree is recursivly built with buildTree and saved in listintegration where
+		each node has information about:
+			courseCode
+			prerequisites
+			courseURL = "https://www.kth.se/student/kurser/kurs/" + courseCode;
+			parentNode
+			_json_id
+	3.	The tree in listIntegration is traversed row by row with BFS and gets assigned
+		and unique ID for each node in the tree. That is needed for the Treant library.
+	4.	nodestructure is a jsonObject used by Treant and is created and formated
+		by exportTree.
+	5.	Treant uses simple_chart_config that is the "config" concatenated with the
+		"nodestructure" and visually shows the tree.
 
-    // formats singular node to array format for Treant.js
-    // format according to chart simple_chart_config, see treantTree.js and treant docs
-    formatNode() {
 
-      if (this.parentNode == null) {
-        var arr = {
-          _json_id: this._json_id,
-          text: { name: this.courseCode }
-        };
+*/
+// config for tree container div
+// see html
+var config = {
+	container: "#chart",
 
-        return arr;
-      } else {
+	node: {
+		collapsable: true
+	},
+	connectors: {
+		type: 'step'
+	},
+	nodeAlign: 'top',
 
-        var arr = {
-          _json_id: this._json_id,
-          parent: this.parentNode,
-          text: { name: this.courseCode }
-        };
+};
 
-        return arr;
-
-      }
-    }
-
-    // converts all nodes to treant array format and return array with all converted nodes
-    exportTree() {
-
-      // add current node to array
-      var arr = [this.formatNode()];
-      for (var i = 0; i < this.prerequisites.length; i++) {
-        arr = arr.concat(this.prerequisites[i].exportTree());
-      }
-
-      return arr;
-    }
-
-    // temp function to represent patrik&jing and erik&celine features
-    // input course code
-    // expected output is string array of required courses course codes. empty array if none exist
-    jsonToArray(){
-      var courseCode = this.courseCode;
-
-        if (courseCode == "II1305") {
-          return ["ID1018", "ID1020", "IS1200"];
-        } else if (courseCode == "ID1018") {
-          return []
-        } else if (courseCode == "ID1020") {
-          return ["ID1018", "IS1200"]
-        } else if (courseCode == "IS1200") {
-          return []
-        }
-
-    }
-
-    // adds child node to parent node prerequisites array
-    addChild(node){
-        this.prerequisites.push(node);
-    }
-
-    // recursively goes through all prerequisites according to json files.
-    // fully constructs tree object for later export
-    buildTree() {
-
-      var reqArr = this.jsonToArray();
-
-      for (var i = 0; i < reqArr.length; i++){
-        var temp = new Node(reqArr[i]);
-
-        temp.parentNode = this;
-        this.addChild(temp);
-        temp.buildTree();
-      }
-      return this;
-    }
-
+var listIntegration;
+// exports node tree to prereqList.js..... is this used somewhere? decrepit?
+function getRootNode() {
+	return listIntegration;
 }
 
+// function is called in graph.html
+function firstCall(courseArgument){
 
-function chopTreeInverse(array, len) {
+	// listIntegration has taken jsonObject and converted it into a tree of nodes
+	listIntegration = nodifyLookupMAIN(courseArgument).buildTree(); // SearchBox integration needed.
 
+	// assigns a unique ID to every node in the tree
+	listIntegration.assignIdentifiers([]);
 
+	// sets up nodes in the right format for the Treant
+	var nodeStructure = listIntegration.exportTree();
 
-  var rootArr = array[0];
-  root = new Node(rootArr[1]);
-
-  root.parentNode = null;
-
-  for (var i = 0; i < rootArr[3].length; i++) {
-    var nodeInfo = getCorrectNodeArr(rootArr[3][i]);
-    root.addChild(buildOtherNodePlz(root, nodeInfo));
-  }
-
-
-
+	// combine config with tree for Treant graph generation
+	var simple_chart_config = [config].concat(nodeStructure);
+	return simple_chart_config;
 }
-
-function buildOtherNodePlz(pear, yarr) {
-
-  var node = new Node(yarr[1]);
-  node.parentNode = pear;
-
-  for (var i=0; i < yarr[3].length; i++) {
-    var nodeInfo = getCorrectNodeArr(yarr[3][i]);
-    node.addChild(buildOtherNodePlz(node, nodeInfo));
-  }
-
-
-
-
-}
-
-function getCorrectNodeArr(nodeCourseCode) {
-
-  console.log("looking for " + nodeCourseCode);
-  console.log("gloabal arr: ");
-  console.log(allPraiseTheArrGods);
-  console.log(instanceCounter);
-
-  for (var i=0; i < allPraiseTheArrGods.length; i++) {
-    if(allPraiseTheArrGods[i][1] == nodeCourseCode) {
-      console.log("found; " + nodeCourseCode);
-      return allPraiseTheArrGods[i];
-      break;
-    }
-  }
-
-  console.log("getCorrectNodeArr error when looking for: " + nodeCourseCode);
-  console.log(allPraiseTheArrGods);
-
-}
-
-
-// temp global for debug. declare in chopTreeInverse
-var root = null;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-temp1 = new Node("II1305");
