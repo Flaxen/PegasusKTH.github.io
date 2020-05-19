@@ -1,9 +1,11 @@
 *{
   margin: 0;
+  padding: 0;
 }
 
 html, body{
   height: 100%;
+
 }
 
 #prereqList{
@@ -31,7 +33,7 @@ h1{
 }
 
 #placeholder{
-  width: 16vmax;
+  width:16vmax;
   border: none;
   border-bottom: 1px solid black;
   background-color: transparent;
@@ -55,27 +57,15 @@ h1{
   margin-right: 45.8%;
 }
 
-#loading-background{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  margin: 0 !important;
-  padding-left: 0px;
-  padding-right: 0px;
-  
-}
-
 
 #loadingContainer {
   height: 100%;
   width: 100%;
   /* background-color:#ffffff; */
-    position: absolute;
+  background-image: url("../image/background-load-screen-optimized.gif");
+  position: absolute;
   z-index: 99 !important;
-
 }
-
-
 
 #loadingText {
   text-align: center;
@@ -178,23 +168,17 @@ section{
   display:inline-block;
 }
 
-#section1{
-
-}
-#section2{
-
-}
-
 
 #footer{
   position: relative;
-  /* bottom:0; */
+  /*bottom:0;*/
   width:100%;
   height:70px;
   background-color: rgba(200,200,200,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: -70px;
   clear: both;
 }
 
